@@ -1,23 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import { useRef, useState } from 'react'
 
 function App() {
+
+  const [name, setName] = useState("")
+
+  const inputRef = useRef()
+  const buttonRef = useRef()
+  const handleSubmit = () => {
+    console.log("Submit", buttonRef)
+    inputRef.current.focus()
+    buttonRef.current.style.backgroundColor = 'green'
+    buttonRef.current.childNodes[0].nodeValue = 'Thank You'
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>App Component</h1>
+      <input ref={inputRef} value={name} onChange={(e) => setName(e.target.value)} />
+      <h4>Entered Data is : {name}</h4>
+      <button ref={buttonRef} style={{ backgroundColor: 'red' }} onClick={handleSubmit}>Submit</button>
     </div>
   );
 }
